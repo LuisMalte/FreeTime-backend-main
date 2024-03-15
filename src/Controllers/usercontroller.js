@@ -70,7 +70,7 @@ async function updateuser(req, res){
             fulltimer: req.body.fulltimer,
             freetimer: req.body.freetimer
         },{ 
-            where: { id :  req.params.id }
+            where: { userId :  req.params.userId }
         }).then(function (data){
             return res.status(200).json({
                 data: data

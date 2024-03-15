@@ -3,6 +3,7 @@ const connection = require('./connection');
 //Models
 const user = require('../Models/user');
 const freetimer = require('../Models/freetimer');
+const fulltimer = require('../Models/fulltimer');
 const department = require('../Models/department');
 const city = require('../Models/city');
 const category = require('../Models/category');
@@ -34,29 +35,21 @@ async function sync(){
     });
 
 
-    // freetimer.hasMany(category,{
-    //     foreignKey: 'categortyId',
-    //     onDelete: 'restrict',
-    //     onUpdate:'cascade'
-    // });
-    // category.belongsTo(freetimer,{
-    //     foreignKey: 'freetimerID'
-    // });
-
-
-
       // relacion muchos a muchos entre freetime y categorias
     freetimer.belongsToMany(category, 
         { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
     category.belongsToMany(freetimer,
          { through: 'FreetimerCategory', foreignKey: 'categoryId' });
 
-         
-    // Define One-to-One Relationship between freetimer and user
+
+    // relacion uno a uno entre freetimer y user
     freetimer.belongsTo(user, { foreignKey: 'userId' });
     user.hasOne(freetimer, { foreignKey: 'userId' });
 
 
+    // relacion uno a uno entre fulltimer y user
+    fulltimer.belongsTo(user, { foreignKey: 'userId' });
+    user.hasOne(fulltimer, { foreignKey: 'userId' });
 
     await connection.sync({force: false})
     .then(() => { 
@@ -69,7 +62,7 @@ async function sync(){
     //create json
     departamentjson.createDepartments();
     cityjson.createCities();
-   categoryjson.createCategories()
+    categoryjson.createCategories()
 
 }
 
