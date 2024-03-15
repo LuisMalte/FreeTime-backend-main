@@ -13,10 +13,10 @@
             type: DataTypes.STRING,
             allowNull: false
         },
-        CategoryDescription:{
-            type: DataTypes.STRING,
-            allowNull: false
-        }
+        // categoryDescription:{
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // }
     },{
         sequelize:connection,
         modelName: 'category',

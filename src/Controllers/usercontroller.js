@@ -33,7 +33,7 @@ async function listusers(req, res){
     try{
         await user.findAll({
             attributes: [
-                'id',
+                'userId',
                 'FullName',
                 'email',
                 'phoneNumber',
@@ -90,7 +90,7 @@ async function updateuser(req, res){
 async function disableuser(req, res){
     try{
         await user.destroy({
-            where: { id : req.params.id}
+            where: { userId : req.params.userId}
         }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -110,7 +110,7 @@ async function disableuser(req, res){
 async function enableuser(req, res){
     try{
         await user.restore({
-            where: { id : req.params.id}
+            where: { userId : req.params.userId}
         }).then(function (data){
             return res.status(200).json({
                 data: data
