@@ -1,6 +1,6 @@
 const category = require('../../Models/category');
 
-function createCategory(){
+function createCategories(){
     category.bulkCreate(
         [
             {
@@ -111,5 +111,5 @@ function createCategory(){
 }
 
 module.exports = {
-   createCategory
+   createCategories
 };

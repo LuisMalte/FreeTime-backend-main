@@ -33,9 +33,23 @@ async function sync(){
         foreignKey: 'cityId'
     });
 
+
+    // freetimer.hasMany(category,{
+    //     foreignKey: 'categortyId',
+    //     onDelete: 'restrict',
+    //     onUpdate:'cascade'
+    // });
+    // category.belongsTo(freetimer,{
+    //     foreignKey: 'freetimerID'
+    // });
+
+
+
       // Define Many-to-Many Relationship between freetimer and category using a join table
-    freetimer.belongsToMany(category, { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
-    category.belongsToMany(freetimer, { through: 'FreetimerCategory', foreignKey: 'categoryId' })
+    freetimer.belongsToMany(category, 
+        { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
+    category.belongsToMany(freetimer,
+         { through: 'FreetimerCategory', foreignKey: 'categoryId' })
 
 
     await connection.sync({force: false})
@@ -49,7 +63,7 @@ async function sync(){
     //create json
     departamentjson.createDepartments();
     cityjson.createCities();
-    categoryjson.createCategory();
+   categoryjson.createCategories()
 
 }
 
