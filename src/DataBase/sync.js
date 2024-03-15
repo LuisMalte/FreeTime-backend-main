@@ -49,7 +49,13 @@ async function sync(){
     freetimer.belongsToMany(category, 
         { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
     category.belongsToMany(freetimer,
-         { through: 'FreetimerCategory', foreignKey: 'categoryId' })
+         { through: 'FreetimerCategory', foreignKey: 'categoryId' });
+
+         
+    // Define One-to-One Relationship between freetimer and user
+    freetimer.belongsTo(user, { foreignKey: 'userId' });
+    user.hasOne(freetimer, { foreignKey: 'userId' });
+
 
 
     await connection.sync({force: false})
