@@ -45,7 +45,7 @@ async function sync(){
 
 
 
-      // Define Many-to-Many Relationship between freetimer and category using a join table
+      // relacion muchos a muchos entre freetime y categorias
     freetimer.belongsToMany(category, 
         { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
     category.belongsToMany(freetimer,
