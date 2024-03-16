@@ -11,12 +11,11 @@ user.init(
       primaryKey: true,
       autoIncrement: true
     },
-    FullName: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: false
     },
-    email: {
+    userEmail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -24,24 +23,21 @@ user.init(
         isEmail: true
       }
     },
-    phoneNumber: {
+    userPhone: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    cityId:{
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    address: {
+    userAddress: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    password: {
+    userPassword: {
       type: DataTypes.STRING,
       allowNull: false
-    },cityId:{
+    },
+    cityId:{
         type: DataTypes.STRING,
         allowNull: false
     }

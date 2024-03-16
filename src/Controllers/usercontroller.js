@@ -2,17 +2,16 @@ require('express');
 const user = require('../Models/user');
 
 // Crear usere
-async function createuser(req, res){
+async function createUser(req, res){
     try{
         await user.create({
-            FullName: req.body.FullName,
-            email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhone: req.body.userPhone,
+            userAddress: req.body.userAddress,
+            userPassword: req.body.userPassword,
             cityId: req.body.cityId,
-            address: req.body.address,
-            fulltimer: req.body.fulltimer,
-            freetimer: req.body.freetimer,
-            password: req.body.password
+
         }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -29,20 +28,19 @@ async function createuser(req, res){
 }
 
 // Listar useres
-async function listusers(req, res){
+async function listUser(req, res){
     try{
         await user.findAll({
             attributes: [
                 'userId',
-                'FullName',
-                'email',
-                'phoneNumber',
+                'userName',
+                'userEmail',
+                'userPhone',
                 'cityId',
-                'address',
-                'fulltimer',
-                'freetimer'
+                'userAddress',
+                'userPassword'
             ],
-            order: ['FullName']
+            order: ['userName']
         }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -59,16 +57,15 @@ async function listusers(req, res){
 }
 
 // Actualizar usere
-async function updateuser(req, res){
+async function updateUser(req, res){
     try{
         await user.update({
-            FullName: req.body.FullName,
-            email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
+            userName: req.body.userName,
+            userEmail: req.body.userEmail,
+            userPhone: req.body.userPhone,
             cityId: req.body.cityId,
-            address: req.body.address,
-            fulltimer: req.body.fulltimer,
-            freetimer: req.body.freetimer
+            userAddress: req.body.userAddress,
+          
         },{ 
             where: { userId :  req.params.userId }
         }).then(function (data){
@@ -87,7 +84,7 @@ async function updateuser(req, res){
 }
 
 // Deshabilitar usere
-async function disableuser(req, res){
+async function disableUser(req, res){
     try{
         await user.destroy({
             where: { userId : req.params.userId}
@@ -107,7 +104,7 @@ async function disableuser(req, res){
 }
 
 // Habilitar usere
-async function enableuser(req, res){
+async function enableUser(req, res){
     try{
         await user.restore({
             where: { userId : req.params.userId}
@@ -127,9 +124,9 @@ async function enableuser(req, res){
 }
 
 module.exports = {
-    createuser,
-    listusers,
-    updateuser,
-    disableuser,
-    enableuser
+    createUser,
+    listUser,
+    updateUser,
+    disableUser,
+    enableUser
 }
