@@ -34,7 +34,7 @@ async function listFreetimers(req, res){
                 'healthInsurance',
                 'categoryId'
             ],
-            order: ['userId'],
+            order: ['freetimerId'],
             include: {
                 model: user,
                 where: { userId : req.params.userId },

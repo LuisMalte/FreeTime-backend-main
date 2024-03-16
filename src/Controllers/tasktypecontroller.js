@@ -1,15 +1,17 @@
 require('express');
-const category = require('../Models/category');
+const task = require('../Models/tasktype');
 
-async function listCategories(req, res){
+async function listTypes(req, res){
     try{
-        await category.findAll({
+        await task.findAll({
             attributes: [
-                'categoryId',
-                'categoryName'
+                'taskId',
+                'taskName'
             ],
-            order: ['categoryName',
-                    'categoryDescription'
+            order: [
+                     'taskId',
+                    'taskName',
+                    'taskDescription'
                 
                 ]
         }).then(function (data){
@@ -28,5 +30,5 @@ async function listCategories(req, res){
 }
 
 module.exports = {
-    listCategories
+    listTypes
 }

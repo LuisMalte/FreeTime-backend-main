@@ -38,14 +38,6 @@ user.init(
       allowNull: false,
       unique: true
     },
-    // fulltimer: {
-    //   type: DataTypes.BOOLEAN,
-    //   allowNull: false
-    // },
-    // freetimer: {
-    //   type: DataTypes.BOOLEAN,
-    //   allowNull: false
-    // },
     password: {
       type: DataTypes.STRING,
       allowNull: false

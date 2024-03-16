@@ -1,0 +1,132 @@
+const express = require('express');
+const Task = require('../Models/task');
+const fulltimer = require('../Models/fulltimer');
+const taskType = require('../Models/tasktype');
+
+
+// Crear tarea
+async function createTask(req, res){
+    try{
+        await Task.create({
+            taskName: req.body.taskName,
+            taskDescription: req.body.taskDescription,
+            date: req.body.date,
+            offer: req.body.offer,
+            address: req.body.address,
+            taskTypeId: req.body.taskTypeId,
+            fulltimerId: req.body.fulltimerId
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error =>{
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+// Listar tareas
+async function listTasks(req, res){
+    try{
+        await Task.findAll({
+            attributes: [
+                'taskId',
+                'taskName',
+                'taskDescription',
+                'date',
+                'offer',
+                'address',
+                'taskTypeId',
+                'fulltimerId'
+            ],
+            order: ['taskName'],
+            include: {
+                model: fulltimer,
+                where: { fulltimerId : req.params.fulltimerId },
+                attributes: [   
+                                 
+                                'fulltimerId',
+                                'userId'
+                            ]  
+            }, include: {
+                model: taskType,
+                where: { taskTypeId : req.params.taskTypeId },
+                attributes: [   
+                                'taskTypeId',
+                                'taskTypeName',
+                                'taskTypeDescription' 
+                            ]  
+            }
+         }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+// Actualizar tarea
+async function updateTask(req, res){
+    try{
+        await Task.update({
+            taskName: req.body.taskName,
+            taskDescription: req.body.taskDescription,
+            date: req.body.date,
+            offer: req.body.offer,
+            address: req.body.address,
+            taskTypeId: req.body.taskTypeId
+        },{ 
+            where: { taskId :  req.params.taskId }
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+// Eliminar tarea
+async function deleteTask(req, res){
+    try{
+        await Task.destroy({
+            where: { taskId : req.params.taskId }
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+module.exports = {
+    createTask,
+    listTasks,
+    updateTask,
+    deleteTask
+}

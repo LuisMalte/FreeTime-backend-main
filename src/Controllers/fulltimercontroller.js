@@ -30,7 +30,7 @@ async function listFulltimers(req, res){
                 'fulltimerId',
                 'userId',
             ],
-            order: ['userId'],
+            order: ['fulltimerId'],
             include: {
                 model: user,
                 where: { userId : req.params.userId },
