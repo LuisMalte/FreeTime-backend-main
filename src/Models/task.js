@@ -34,13 +34,12 @@ Task.init(
       allowNull: false
     },
     taskTypeId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     }, 
      fulltimerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
      }
 
   },

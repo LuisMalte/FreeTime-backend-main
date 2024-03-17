@@ -54,16 +54,17 @@ async function listFreetimers(req, res) {
                     ]
                 }
             ]
-        });
-
-        return res.status(200).json({
-            data: data
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(400).json({
-            error: error.message
-        });
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    } catch(e){
+        console.log(e);
     }
 }
 // Listar freetimers

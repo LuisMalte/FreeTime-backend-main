@@ -11,6 +11,8 @@ const fulltimerrouter = require('./Routers/fulltimerrouter.js');
 const freetimerrouter = require('./Routers/feetimerrouter.js');
 const categoryrouter = require('./Routers/categoryrouter.js');
 const tasktyperouter = require('./Routers/tasktyperouter.js');
+const taskrouter = require('./Routers/taskrouter.js');
+
 
 // const productrouter = require('./Routers/productrouter.js');
 // const departmentrouter = require('./Routers/departmentrouter.js');
@@ -28,3 +30,4 @@ app.use('/api', fulltimerrouter);
 app.use('/api', freetimerrouter);
 app.use('/api', categoryrouter);
 app.use('/api', tasktyperouter);
+app.use('/api', taskrouter);

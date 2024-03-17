@@ -38,7 +38,7 @@ async function sync(){
     });
 
 
-      // relacion muchos a muchos entre freetime y categorias
+      // relacion uno a muchos entre freetime y categorias
     category.hasMany(freetimer,{
         foreignKey: 'categoryId',
         onDelete: 'restrict',
@@ -62,7 +62,7 @@ async function sync(){
 
       //relacion uno a muchos entre tipo de tarea y tareas
     taskType.hasMany(task,{
-        foreignKey: 'taskId',
+        foreignKey: 'taskTypeId',
         onDelete: 'restrict',
         onUpdate:'cascade'
     });
@@ -71,8 +71,18 @@ async function sync(){
     });
     
 
-    task.belongsTo(freetimer, { foreignKey: 'freetimerId' });
-    freetimer.hasOne(task, { foreignKey: 'freetimerId' });
+    fulltimer.hasMany(task,{
+        foreignKey: 'fulltimerId',
+        onDelete: 'restrict',
+        onUpdate:'cascade'
+    });
+    task.belongsTo(fulltimer,{
+        foreignKey: 'fulltimerId'
+    });
+    
+
+    // task.belongsTo(freetimer, { foreignKey: 'freetimerId' });
+    // freetimer.hasOne(task, { foreignKey: 'freetimerId' });
 
     await connection.sync({force: false})
     .then(() => { 
