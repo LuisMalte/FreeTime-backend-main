@@ -18,6 +18,7 @@ fulltimer.init(
   },
   {
     sequelize: connection,
+    paranoid: true, 
     modelName: 'fulltimer'
   }
 );

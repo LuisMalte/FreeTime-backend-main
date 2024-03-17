@@ -31,7 +31,6 @@ user.init(
     userAddress: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     userPassword: {
       type: DataTypes.STRING,

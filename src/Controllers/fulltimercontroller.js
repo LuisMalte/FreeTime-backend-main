@@ -23,12 +23,11 @@ async function createFulltimer(req, res){
 }
 
 // Listar fulltimers
-async function listFulltimers(req, res){
+async function listFulltimer(req, res){
     try{
         await fulltimer.findAll({
             attributes: [
                 'fulltimerId',
-                'userId',
             ],
             order: ['fulltimerId'],
             include: {
@@ -36,12 +35,8 @@ async function listFulltimers(req, res){
                 where: { userId : req.params.userId },
                 attributes: [   
                                 'userName', 
-                                'userId',
-                                'FullName',
-                                'email',
-                                'phoneNumber',
-                                'cityId',
-                                'address',
+                                'userId'
+                      
                             ]   
             }
          }).then(function (data){
@@ -104,7 +99,7 @@ async function enableFulltimer(req, res){
 
 module.exports = {
     createFulltimer,
-    listFulltimers,
+    listFulltimer,
     disableFulltimer,
     enableFulltimer
 }
