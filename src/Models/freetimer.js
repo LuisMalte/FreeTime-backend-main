@@ -34,7 +34,10 @@ freetimer.init(
   },
   {
     sequelize: connection,
-    modelName: 'freetimer'
+    modelName: 'freetimer',
+    paranoid: true,
+    deletedAt: 'destroyTime'
+
   }
 );
 

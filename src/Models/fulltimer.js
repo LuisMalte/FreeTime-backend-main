@@ -19,7 +19,9 @@ fulltimer.init(
   {
     sequelize: connection,
     paranoid: true, 
-    modelName: 'fulltimer'
+    modelName: 'fulltimer',
+    deletedAt: 'destroyTime'
+
   }
 );
 

@@ -21,7 +21,9 @@ taskType.init({
   sequelize: connection,
   modelName: 'taskType',
   paranoid: true,
-  deletedAt: 'destroyTime'
+  deletedAt: 'destroyTime',
+  paranoid: true,
+  deleteAt: 'destroyTime'
 });
 
 module.exports = taskType;

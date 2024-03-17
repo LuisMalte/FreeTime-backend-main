@@ -39,11 +39,14 @@ async function sync(){
 
 
       // relacion muchos a muchos entre freetime y categorias
-    freetimer.belongsToMany(category, 
-        { through: 'FreetimerCategory', foreignKey: 'freetimerId' });
-    category.belongsToMany(freetimer,
-         { through: 'FreetimerCategory', foreignKey: 'categoryId' });
-
+    category.hasMany(freetimer,{
+        foreignKey: 'categoryId',
+        onDelete: 'restrict',
+        onUpdate:'cascade'
+    });
+    freetimer.belongsTo(category,{
+        foreignKey: 'categoryId'
+    });
 
     // relacion uno a uno entre freetimer y user
     freetimer.belongsTo(user, { foreignKey: 'userId' });

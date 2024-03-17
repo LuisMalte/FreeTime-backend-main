@@ -46,7 +46,10 @@ Task.init(
   },
   {
     sequelize: connection,
-    modelName: 'task'
+    modelName: 'task',
+    paranoid: true,
+    deleteAt: 'destroyTime'
+
   }
 );
 

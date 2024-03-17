@@ -1,6 +1,7 @@
 const express = require('express');
 const freetimer = require('../Models/freetimer');
 const user = require('../Models/user');
+const category = require('../Models/category');
 
 // Crear freetimer
 async function createFreetimer(req, res){
@@ -30,22 +31,28 @@ async function listFreetimers(req, res){
         await freetimer.findAll({
             attributes: [
                 'freetimerId',
-                'userId',
                 'healthInsurance',
-                'categoryId'
             ],
             order: ['freetimerId'],
             include: {
                 model: user,
                 where: { userId : req.params.userId },
                 attributes: [   
-                                'userName', 
                                 'userId',
-                                'FullName',
-                                'email',
-                                'phoneNumber',
+                                'userName',
+                                'userEmail',
+                                'userPhone',
                                 'cityId',
-                                'address',
+                                'userAddress',
+                            ]   
+            },
+            include: {
+                model: category,
+                where: { categoryId : req.params.categoryId },
+                attributes: [   
+                    'categoryId',
+                    'categoryName',
+                    'categoryDescription'
                             ]   
             }
          }).then(function (data){

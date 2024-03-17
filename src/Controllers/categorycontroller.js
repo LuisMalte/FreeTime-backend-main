@@ -8,7 +8,9 @@ async function listCategories(req, res){
                 'categoryId',
                 'categoryName'
             ],
-            order: ['categoryName',
+            order: [ 
+                    'categoryId',
+                    'categoryName',
                     'categoryDescription'
                 
                 ]

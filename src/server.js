@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 //routers
 const userrouter = require('./Routers/userrouter.js');
 const fulltimerrouter = require('./Routers/fulltimerrouter.js');
+const freetimerrouter = require('./Routers/feetimerrouter.js');
 
 // const productrouter = require('./Routers/productrouter.js');
 // const departmentrouter = require('./Routers/departmentrouter.js');
@@ -22,4 +23,4 @@ app.listen(port, ()=> {
 //api
 app.use('/api', userrouter);
 app.use('/api', fulltimerrouter);
-// app.use('/api', departmentrouter);
+app.use('/api', freetimerrouter);
