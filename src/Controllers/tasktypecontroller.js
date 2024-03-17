@@ -1,31 +1,29 @@
 require('express');
 const task = require('../Models/tasktype');
 
-async function listTypes(req, res){
-    try{
-        await task.findAll({
+async function listTypes(req, res) {
+    try {
+        const data = await task.findAll({
             attributes: [
-                'taskId',
-                'taskName'
+                'taskTypeId',
+                'taskTypeName',
+                'taskTypeDescription' // Agregar la columna taskTypeDescription
             ],
             order: [
-                     'taskId',
-                    'taskName',
-                    'taskDescription'
-                
-                ]
-        }).then(function (data){
-            return res.status(200).json({
-                data: data
-            });
-        }).catch(error => {
-            return res.status(400).json({
-                error: error
-            });
-        })
-    }
-    catch(e){
-        console.log(e);
+                'taskTypeId',
+                'taskTypeName',
+                'taskTypeDescription' // Asegúrate de incluir la columna aquí también
+            ]
+        });
+
+        return res.status(200).json({
+            data: data
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({
+            error: error.message
+        });
     }
 }
 

@@ -9,6 +9,8 @@ const port = process.env.PORT || 3000;
 const userrouter = require('./Routers/userrouter.js');
 const fulltimerrouter = require('./Routers/fulltimerrouter.js');
 const freetimerrouter = require('./Routers/feetimerrouter.js');
+const categoryrouter = require('./Routers/categoryrouter.js');
+const tasktyperouter = require('./Routers/tasktyperouter.js');
 
 // const productrouter = require('./Routers/productrouter.js');
 // const departmentrouter = require('./Routers/departmentrouter.js');
@@ -24,3 +26,5 @@ app.listen(port, ()=> {
 app.use('/api', userrouter);
 app.use('/api', fulltimerrouter);
 app.use('/api', freetimerrouter);
+app.use('/api', categoryrouter);
+app.use('/api', tasktyperouter);
