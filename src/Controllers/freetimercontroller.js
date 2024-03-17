@@ -25,8 +25,49 @@ async function createFreetimer(req, res){
     }
 }
 
+async function listFreetimers(req, res) {
+    try {
+        const data = await freetimer.findAll({
+            attributes: [
+                'freetimerId',
+                'healthInsurance',
+            ],
+            order: ['freetimerId'],
+            include: [
+                {
+                    model: user,
+                    attributes: [   
+                        'userId',
+                        'userName',
+                        'userEmail',
+                        'userPhone',
+                        'cityId',
+                        'userAddress',
+                    ]
+                },
+                {
+                    model: category,
+                    attributes: [   
+                        'categoryId',
+                        'categoryName',
+                        'categoryDescription'
+                    ]
+                }
+            ]
+        });
+
+        return res.status(200).json({
+            data: data
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({
+            error: error.message
+        });
+    }
+}
 // Listar freetimers
-async function listFreetimers(req, res){
+async function listFreetimerByCategories(req, res){
     try{
         await freetimer.findAll({
             attributes: [
@@ -34,27 +75,17 @@ async function listFreetimers(req, res){
                 'healthInsurance',
             ],
             order: ['freetimerId'],
-            include: {
-                model: user,
-                where: { userId : req.params.userId },
-                attributes: [   
-                                'userId',
-                                'userName',
-                                'userEmail',
-                                'userPhone',
-                                'cityId',
-                                'userAddress',
-                            ]   
-            },
-            include: {
-                model: category,
-                where: { categoryId : req.params.categoryId },
-                attributes: [   
-                    'categoryId',
-                    'categoryName',
-                    'categoryDescription'
-                            ]   
-            }
+            include: [
+                {
+                    model: category,
+                    where: { categoryId: req.params.categoryId },
+                    attributes: [   
+                        'categoryId',
+                        'categoryName',
+                        'categoryDescription'
+                    ]
+                }
+            ]
          }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -134,8 +165,9 @@ async function enableFreetimer(req, res){
 
 module.exports = {
     createFreetimer,
-    listFreetimers,
+    listFreetimerByCategories,
     updateFreetimer,
     disableFreetimer,
+    listFreetimers,
     enableFreetimer
 }
