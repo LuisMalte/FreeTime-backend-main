@@ -1,9 +1,10 @@
 require('./DataBase/sync.js');
 
-const connection = require('./DataBase/connection.js');
+
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const cors = require('cors');
+const port = process.env.PORT || 1337;
 
 //routers
 const userrouter = require('./Routers/userrouter.js');
@@ -12,13 +13,18 @@ const freetimerrouter = require('./Routers/feetimerrouter.js');
 const categoryrouter = require('./Routers/categoryrouter.js');
 const tasktyperouter = require('./Routers/tasktyperouter.js');
 const taskrouter = require('./Routers/taskrouter.js');
+const departmentrouter = require('./Routers/departmentrouter.js');
+const cityrouter = require('./Routers/cityrouter.js')
 
-
-// const productrouter = require('./Routers/productrouter.js');
-// const departmentrouter = require('./Routers/departmentrouter.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+  }));
+
 
 app.listen(port, ()=> {
     console.log("The application is running on port: " + port);
@@ -31,3 +37,5 @@ app.use('/api', freetimerrouter);
 app.use('/api', categoryrouter);
 app.use('/api', tasktyperouter);
 app.use('/api', taskrouter);
+app.use('/api', departmentrouter);
+app.use('/api', cityrouter);
