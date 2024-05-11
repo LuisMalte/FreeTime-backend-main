@@ -4,7 +4,7 @@ require('./DataBase/sync.js');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 3000;
 
 //routers
 const userrouter = require('./Routers/userrouter.js');
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false}));
 
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3001'
   }));
 
 
