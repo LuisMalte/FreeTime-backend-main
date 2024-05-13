@@ -5,8 +5,8 @@ async function listTypes(req, res) {
     try {
         const data = await task.findAll({
             attributes: [
-                'taskTypeId',
-                'taskTypeName',
+                ['taskTypeId', 'value'],
+                ['taskTypeName', 'label'],
                 'taskTypeDescription' // Agregar la columna taskTypeDescription
             ],
             order: [

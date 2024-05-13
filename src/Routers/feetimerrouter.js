@@ -8,5 +8,6 @@ router.get('/listFreetimerByCategories/:categoryId', freetimercontroller.listFre
 router.put('/updateFreetimer/:freetimerId', freetimercontroller.updateFreetimer);
 router.put('/disablefreetimer/:freetimerId', freetimercontroller.disableFreetimer);
 router.put('/enablefreetimer/:freetimerId', freetimercontroller.enableFreetimer);
+router.get('/getfreetimer/:freetimerId', freetimercontroller.getFreetimer)
 
 module.exports = router;

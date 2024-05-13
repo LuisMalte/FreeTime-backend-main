@@ -33,11 +33,37 @@ async function listFulltimer(req, res){
             include: {
                 model: user,
                 attributes: [   
-                                'userName', 
-                                'userId'
-                      
-                            ]   
+                    'userId',
+                    'userName',
+                    'userEmail',
+                    'userPhone',
+                    'cityId',
+                    'userAddress',
+                            ]     
             }
+         }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
+async function listFulltimerId(req, res){
+    try{
+        await fulltimer.findAll({
+            attributes: [
+                'fulltimerId',
+            ],
+            order: ['fulltimerId'],
+        
          }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -100,5 +126,6 @@ module.exports = {
     createFulltimer,
     listFulltimer,
     disableFulltimer,
-    enableFulltimer
+    enableFulltimer,
+    listFulltimerId
 }

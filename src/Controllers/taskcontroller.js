@@ -224,6 +224,35 @@ async function enableTask(req, res){
     }
 }
 
+async function getTask(req, res){
+    try{
+        await Task.findOne({
+            where: {taskId  : req.params.taskId},
+            attributes: [
+                'taskName',
+                'taskDescription',
+                'date',
+                'offer',
+                'address',
+                'address',
+                'taskTypeId'
+
+            ]
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
 module.exports = {
     createTask,
     listTasks,
@@ -231,5 +260,6 @@ module.exports = {
     disableTask,
     enableTask,
     listTasksByFulltimer,
-    listTasksByTaskTypes
+    listTasksByTaskTypes,
+    getTask
 }

@@ -5,8 +5,8 @@ async function listCategories(req, res){
     try{
         await category.findAll({
             attributes: [
-                'categoryId',
-                'categoryName'
+                ['categoryId','value'],
+                ['categoryName','label']
             ],
             order: [ 
                     'categoryId',

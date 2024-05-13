@@ -1,4 +1,5 @@
 require('express');
+const city = require('../Models/city');
 const user = require('../Models/user');
 
 // Crear usere
@@ -27,6 +28,44 @@ async function createUser(req, res){
     }
 }
 
+
+async function getUser(req, res){
+    try{
+        await user.findOne({
+            where: {userId : req.params.userId},
+            attributes: [
+                'userId',
+                'userName',
+                'userEmail',
+                'userPhone',
+                'userAddress',
+                'userPassword',
+                'cityId',
+            ],include:[
+                {
+                    model:city,
+                    attributes:[
+                        'departmentId'
+                    ]
+
+                }
+            ]
+
+            //Falta traer el departmentId
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 // Listar useres
 async function listUser(req, res){
     try{
@@ -40,7 +79,19 @@ async function listUser(req, res){
                 'userAddress',
                 'userPassword'
             ],
-            order: ['userName']
+            order: ['userName'],
+            include:[
+                {
+                    model:city,
+                    attributes:[
+                        'cityName',
+                        'departmentId'
+
+                    
+                    ]
+
+                }
+            ]
         }).then(function (data){
             return res.status(200).json({
                 data: data
@@ -128,5 +179,6 @@ module.exports = {
     listUser,
     updateUser,
     disableUser,
-    enableUser
+    enableUser,
+    getUser
 }

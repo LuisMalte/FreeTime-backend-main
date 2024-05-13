@@ -52,7 +52,8 @@ async function listFreetimers(req, res) {
                         'categoryName',
                         'categoryDescription'
                     ]
-                }
+                },
+                
             ]
         }).then(function (data){
             return res.status(200).json({
@@ -162,13 +163,38 @@ async function enableFreetimer(req, res){
     catch (e){
         console.log(e);
     }
+
 }
 
+async function getFreetimer(req, res){
+    try{
+        await freetimer.findOne({
+            where: {freetimerId  : req.params.freetimerId},
+            attributes: [
+                'categoryId',
+            ]
+
+            //Falta traer el departmentId
+        }).then(function (data){
+            return res.status(200).json({
+                data: data
+            });
+        }).catch(error => {
+            return res.status(400).json({
+                error: error
+            });
+        })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 module.exports = {
     createFreetimer,
     listFreetimerByCategories,
     updateFreetimer,
     disableFreetimer,
     listFreetimers,
-    enableFreetimer
+    enableFreetimer,
+    getFreetimer
 }
