@@ -14,7 +14,6 @@ const tasktyperouter = require('./Routers/tasktyperouter.js');
 const taskrouter = require('./Routers/taskrouter.js');
 const departmentrouter = require('./Routers/departmentrouter.js');
 const cityrouter = require('./Routers/cityrouter.js')
-const authenticateToken = require('./Middleware/authenticateToken'); 
 
 
 // const productrouter = require('./Routers/productrouter.js');
@@ -41,4 +40,3 @@ app.use('/api', tasktyperouter);
 app.use('/api', taskrouter);
 app.use('/api', departmentrouter);
 app.use('/api', cityrouter);
-app.use('/api', authenticateToken)

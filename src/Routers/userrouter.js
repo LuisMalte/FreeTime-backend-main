@@ -1,8 +1,10 @@
 const express = require('express');
 const usercontroller = require('../Controllers/usercontroller');
-const authenticateToken = require('../Middleware/authenticateToken'); 
+const authenticateToken = require('../Middleware/authenticateTokenUser'); 
 const router = express.Router();
 
+
+//todos los tokens son del login usuario
 router.post('/createuser', usercontroller.createUser);
 router.get('/listuser',authenticateToken, usercontroller.listUser);
 router.put('/updateuser/:userId',authenticateToken,  usercontroller.updateUser);

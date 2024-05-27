@@ -2,6 +2,10 @@ const express = require('express');
 const freetimer = require('../Models/freetimer');
 const user = require('../Models/user');
 const category = require('../Models/category');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+const jwtPassword = 'qwe987gfdft'
 
 // Crear freetimer
 async function createFreetimer(req, res){
@@ -189,6 +193,40 @@ async function getFreetimer(req, res){
         console.log(e);
     }
 }
+async function loginFreetimer(req, res) {
+    try {
+        const freetimerData = await freetimer.findOne({ where: { freetimerId: req.body.freetimerId, userId: req.body.userId } });
+
+        if (!freetimerData)
+            return res.status(401).json({ message: "Freetimer not found" });
+
+        const userData = await user.findByPk(req.body.userId);
+
+        if (!userData)
+            return res.status(401).json({ message: "User not found" });
+
+        const validPassword = await bcrypt.compare(req.body.userPassword, userData.userPassword);
+
+        if (!validPassword)
+            return res.status(401).json({ message: "Invalid password" });
+
+        const token = jwt.sign(
+            { userId: userData.userId, userCity: userData.cityId },
+            jwtPassword,
+            { expiresIn: '1h' }
+        );
+
+        return res.status(200).json({ token });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+module.exports = {
+    loginFreetimer
+};
+
 module.exports = {
     createFreetimer,
     listFreetimerByCategories,
@@ -196,5 +234,6 @@ module.exports = {
     disableFreetimer,
     listFreetimers,
     enableFreetimer,
-    getFreetimer
+    getFreetimer,
+    loginFreetimer
 }

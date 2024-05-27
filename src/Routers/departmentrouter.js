@@ -1,7 +1,10 @@
 const express = require('express');
 const deparmentcontroller = require('../Controllers/departmentcontroller');
 const router = express.Router();
+const authenticateToken = require('../Middleware/authenticateTokenUser'); 
 
-router.get('/listdepartments', deparmentcontroller.listDepartments);
+//todos los tokens son del login usuario
+
+router.get('/listdepartments',authenticateToken, deparmentcontroller.listDepartments);
 
 module.exports = router;

@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-const jwtPassword = 'qwe987gfd'; 
+const jwtPassword = 'qwe987gfdft'; 
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
-        return res.status(401).json({ message: 'No se ha ingresado ningun token' });
+        return res.status(401).json({ message: 'No esta autorizado' });
     }
 
     jwt.verify(token, jwtPassword, (err, user) => {

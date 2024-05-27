@@ -1,6 +1,9 @@
 const express = require('express');
 const fulltimer = require('../Models/fulltimer');
 const user = require('../Models/user');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const jwtPassword = 'qwe987gfdfull'; 
 
 // Crear fulltimer
 async function createFulltimer(req, res){
@@ -122,10 +125,51 @@ async function enableFulltimer(req, res){
     }
 }
 
+async function loginFulltimer(req, res) {
+    try {
+        // Buscar el fulltimer por fulltimerId y userId
+        const fulltimerData = await fulltimer.findOne({ where: { fulltimerId: req.body.fulltimerId, userId: req.body.userId } });
+
+        // Si no se encuentra el fulltimer, retornar un mensaje de error
+        if (!fulltimerData)
+            return res.status(401).json({ message: "Fulltimer not found" });
+
+        // Obtener los datos del usuario asociado al fulltimer
+        const userData = await user.findByPk(req.body.userId);
+
+        // Si no se encuentra el usuario, retornar un mensaje de error
+        if (!userData)
+            return res.status(401).json({ message: "User not found" });
+
+        // Verificar la contraseña del usuario
+        const validPassword = await bcrypt.compare(req.body.userPassword, userData.userPassword);
+
+        // Si la contraseña no es válida, retornar un mensaje de error
+        if (!validPassword)
+            return res.status(401).json({ message: "Invalid password" });
+
+        // Si todo es correcto, generar un token JWT
+        const token = jwt.sign(
+            { userId: userData.userId, userCity: userData.cityId },
+            jwtPassword,
+            { expiresIn: '1h' }
+        );
+
+        // Retornar el token en la respuesta
+        return res.status(200).json({ token });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
+
 module.exports = {
     createFulltimer,
     listFulltimer,
     disableFulltimer,
     enableFulltimer,
-    listFulltimerId
+    listFulltimerId,
+    loginFulltimer
 }
