@@ -43,6 +43,11 @@ El proyecto fue construido utilizando un entorno de **Node.js** enfocado en esca
 * **Bcrypt:** Hashing de contraseñas para seguridad de datos sensibles.
 * **Cors:** Manejo de políticas de origen cruzado.
 
+
+##  Frontend
+
+El frontend del proyecto https://github.com/LuisMalte/frontend_Free
+
 ## 📂 Arquitectura del Proyecto
 
 El código sigue estrictamente el patrón de diseño **MVC (Model-View-Controller)**:
@@ -58,3 +63,7 @@ El código sigue estrictamente el patrón de diseño **MVC (Model-View-Controlle
 │   └── server.js     # Punto de entrada
 ├── package.json
 └── ...
+
+
+
+
