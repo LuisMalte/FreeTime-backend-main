@@ -5,7 +5,7 @@
 ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 ## 📖 Descripción del Proyecto
@@ -38,7 +38,7 @@ El proyecto fue construido utilizando un entorno de **Node.js** enfocado en esca
 
 * **Express.js:** Framework para el manejo del servidor y enrutamiento modular.
 * **Sequelize ORM:** Modelado de datos y gestión de relaciones SQL.
-* **MySQL:** Base de datos relacional.
+* **PostgreSQL:** Base de datos relacional.
 * **JsonWebToken (JWT):** Seguridad y manejo de sesiones stateless.
 * **Bcrypt:** Hashing de contraseñas para seguridad de datos sensibles.
 * **Cors:** Manejo de políticas de origen cruzado.
